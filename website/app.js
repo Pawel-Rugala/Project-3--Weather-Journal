@@ -2,6 +2,7 @@
 const key = 'e823b669e6402b2763f04501616d718a';
 const url1 = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 const url2 = '&appid=';
+const url3 = '&units=metric';
 
 const element = document.getElementById('generate');
 const dateEl = document.getElementById('date');
@@ -10,7 +11,7 @@ const contentEl = document.getElementById('content');
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
 // Add Event listener to the button.
 
@@ -18,7 +19,7 @@ element.addEventListener('click', () => {
   const zipCode = document.getElementById('zip').value;
   const feel = document.getElementById('feelings').value;
 
-  getWeather(url1, zipCode, url2, key)
+  getWeather(url1, zipCode, url3, url2, key)
     .then((data) => {
       postData('/data', data, feel);
     })
@@ -34,8 +35,8 @@ element.addEventListener('click', () => {
 });
 
 // Helper functions
-const getWeather = async (url1, zipCode, url2, key) => {
-  const res = await fetch(url1 + zipCode + url2 + key);
+const getWeather = async (url1, zipCode, url3, url2, key) => {
+  const res = await fetch(url1 + zipCode + url3 + url2 + key);
   try {
     const data = await res.json();
     return data;
