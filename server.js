@@ -46,6 +46,9 @@ app.post('/data', (req, res) => {
 
   //just a check if data is visible on server
   console.log(projectData);
+
+  // responed that succesfully we make post request!
+  res.status(200).end();
 });
 
 // GET ROUTE
